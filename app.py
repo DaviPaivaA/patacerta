@@ -35,14 +35,22 @@ def cleanup_development_environment():
 
 
 def create_app(config_class=Config):
-    app = Flask(__name__)
+    app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(config_class)
 
 
     db.init_app(app)
 
-    instance_path = os.path.dirname(app.config['SQLALCHEMY_DATABASE_URI'].replace('sqlite:///', ''))
-    upload_path = app.config['UPLOAD_FOLDER']
+    db_path = os.path.join(app.instance_path, "data.db")
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
+
+    # Garante que a pasta instance existe
+    os.makedirs(app.instance_path, exist_ok=True)
+    
+    upload_path = os.path.join(app.instance_path, "uploads")
+    app.config["UPLOAD_FOLDER"] = upload_path
+    os.makedirs(upload_path, exist_ok=True)
+
 
     if not os.path.exists(instance_path):
         os.makedirs(instance_path)
