@@ -7,7 +7,7 @@ from views.main import main_bp
 from views.api_routes import api_bp
 from seed import seed_data
 from models import Animal, Ong, Usuario, PedidoAdocao
-
+'''
 def cleanup_development_environment():
     """Remove o DB e o conteúdo dos uploads para um estado limpo de desenvolvimento."""
     db_path = Config.DATABASE_PATH
@@ -30,7 +30,7 @@ def cleanup_development_environment():
     # Garante que a pasta static/uploads exista
     if not os.path.exists(upload_dir):
         os.makedirs(upload_dir)
-
+'''
 
 
 
