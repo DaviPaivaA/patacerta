@@ -60,9 +60,11 @@ app = create_app()
 
 if __name__ == '__main__':
     is_reloader = os.environ.get('WERKZEUG_RUN_MAIN') == 'true'
-
+    """
+    
     if not is_reloader:
         cleanup_development_environment()
+    """
 
     app = create_app()
 
